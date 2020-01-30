@@ -1,5 +1,8 @@
 #Requires -RunAsAdministrator
 
+#Disable security
+set-executionpolicy unrestricted
+
 #Add KIOSK user inside Administrators group and change password
 $Password = Read-Host "Enter new password for Kiosk Account" -AsSecureString
 $UserAccount = Get-LocalUser -Name "kiosk"
