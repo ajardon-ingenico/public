@@ -22,7 +22,7 @@ Invoke-WebRequest -Headers $headers -Uri "https://artifactory.tunz.com/artifacto
 Invoke-WebRequest -Headers $headers -Uri "https://artifactory.tunz.com/artifactory/list/gl-windows/applications/coredns/nssm.exe" -OutFile "C:\Program Files\CoreDNS\nssm.exe"
 
 #Install CoreDNS as service
-C:\Program Files\CoreDNS\nssm.exe install CoreDNS C:\Program Files\CoreDNS\coredns.exe
+C:\Program Files\CoreDNS\nssm.exe install CoreDNS "C:\Program Files\CoreDNS\coredns.exe"
 C:\Program Files\CoreDNS\nssm.exe set CoreDNS Application "C:\Program Files\CoreDNS\coredns.exe"
 C:\Program Files\CoreDNS\nssm.exe set CoreDNS AppDirectory "C:\Program Files\CoreDNS"
 C:\Program Files\CoreDNS\nssm.exe set CoreDNS description "Local DNS Service"
