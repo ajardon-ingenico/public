@@ -56,7 +56,7 @@ While(!(Test-Connection bastion.infra.eu.ginfra.net -Quiet -Count 1)){
 ################################################################################################################################################
 
 #Join to BASTION domain
-Add-Computer -DomainName "bastion.infra.eu.ginfra.net" -OUPath "OU=Computers,OU=BASTION,OU=TIER1,DC=bastion,DC=infra,DC=eu,DC=ginfra,DC=net" -Credential "oktausername@ingenico.com"
+Add-Computer -DomainName "bastion.infra.eu.ginfra.net" -OUPath "OU=Computers,OU=BASTION,OU=TIER1,DC=bastion,DC=infra,DC=eu,DC=ginfra,DC=net" -Credential "bastion.infra.eu.ginfra.net\oktausername"
 
 Add-Type -AssemblyName PresentationCore,PresentationFramework
 $ButtonType = [System.Windows.MessageBoxButton]::OK
