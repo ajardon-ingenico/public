@@ -11,7 +11,7 @@ $Path="C:\Program Files\CoreDNS"
 if(!(Test-path $Path)) {New-Item -ItemType Directory -Force -Path $Path}
 #Download required files
 if(!(Test-path "C:\TEMP")) {New-Item -ItemType Directory -Force -Path "C:\TEMP"}
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ajardon-ingenico/public/master/coredns.zip" -OutFile "C:\TEMP\coredns.zip"
+Invoke-WebRequest -Headers "X-JFrog-Art-Api:AKCp5e3p2HXDwhds9M6uELLMdTyjn3zEfPECEjKVvDuJfALjXgY6s5Q5diGTp7zye6dMXUaj7" -Uri "https://artifactory.tunz.com/artifactory/list/gl-windows/applications/coredns/coredns.exe" -OutFile "C:\TEMP\coredns.zip"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ajardon-ingenico/public/master/nssm.zip" -OutFile "C:\TEMP\nssm.zip"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ajardon-ingenico/public/master/Corefile" -OutFile "C:\Program Files\CoreDNS\Corefile"
 #Unzip files
