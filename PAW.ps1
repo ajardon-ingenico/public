@@ -9,19 +9,17 @@ Add-LocalGroupMember -Group "Administrators" -Member "kiosk"
 #Create Folder
 $Path="C:\Program Files\CoreDNS"
 if(!(Test-path $Path)) {New-Item -ItemType Directory -Force -Path $Path}
-#Download required files
 if(!(Test-path "C:\TEMP")) {New-Item -ItemType Directory -Force -Path "C:\TEMP"}
+#Download required files
 $headers = @{
   'X-JFrog-Art-Api' = "AKCp5e3p2HXDwhds9M6uELLMdTyjn3zEfPECEjKVvDuJfALjXgY6s5Q5diGTp7zye6dMXUaj7"
   "Content-Type" = "application/json"
   "Accept" = "application/json"
 }
-Invoke-WebRequest -Headers $headers -Method Put -Uri "https://artifactory.tunz.com/artifactory/list/gl-windows/applications/coredns/coredns.exe" -OutFile "C:\TEMP\coredns.zip"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ajardon-ingenico/public/master/nssm.zip" -OutFile "C:\TEMP\nssm.zip"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ajardon-ingenico/public/master/Corefile" -OutFile "C:\Program Files\CoreDNS\Corefile"
-#Unzip files
-Expand-Archive -LiteralPath "C:\TEMP\nssm.zip" -DestinationPath "C:\TEMP"
-Expand-Archive -LiteralPath "C:\TEMP\coredns.zip" -DestinationPath "C:\Program Files\CoreDNS"
+Invoke-WebRequest -Headers $headers -Uri "https://artifactory.tunz.com/artifactory/list/gl-windows/applications/coredns/coredns.exe" -OutFile "C:\Program Files\CoreDNS\coredns.exe"
+Invoke-WebRequest -Headers $headers -Uri "https://artifactory.tunz.com/artifactory/list/gl-windows/applications/coredns/Corefile" -OutFile "C:\Program Files\CoreDNS\Corefile"
+Invoke-WebRequest -Headers $headers -Uri "https://artifactory.tunz.com/artifactory/list/gl-windows/applications/coredns/nssm.exe" -OutFile "C:\TEMP\nssm.exe"
+
 #Install CoreDNS as service
 C:\TEMP\nssm.exe install CoreDNS C:\Program Files\CoreDNS\coredns.exe
 C:\TEMP\nssm.exe set CoreDNS description "Local DNS Service"
