@@ -1,8 +1,0 @@
-bastion.infra.eu.ginfra.net {
-    forward . 10.138.1.15
-    log
-}
-. {
-    forward . 8.8.8.8 8.8.4.4 9.9.9.9
-    log
-}
