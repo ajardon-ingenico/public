@@ -24,7 +24,11 @@ Invoke-WebRequest -Headers $headers -Uri "https://artifactory.tunz.com/artifacto
 
 #Install CoreDNS as service
 C:\TEMP\nssm.exe install CoreDNS C:\Program Files\CoreDNS\coredns.exe
+C:\TEMP\nssm.exe set CoreDNS Application "C:\Program Files\CoreDNS\coredns.exe"
+C:\TEMP\nssm.exe set CoreDNS AppDirectory "C:\Program Files\CoreDNS"
 C:\TEMP\nssm.exe set CoreDNS description "Local DNS Service"
+C:\TEMP\nssm.exe set CoreDNS Start SERVICE_AUTO_START
+
 #Start CoreDNS Service
 While(!(Get-Service -Name "CoreDNS" -ErrorAction SilentlyContinue)){
     Write-Progress -Activity "CoreDNS Service" -Status "Waiting for CoreDNS service to be ready"
