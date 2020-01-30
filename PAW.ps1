@@ -1,3 +1,15 @@
+#Display message if powershell is not runing as administrator
+If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
+{
+  # Relaunch as an elevated process:
+  Add-Type -AssemblyName PresentationCore,PresentationFramework
+  $ButtonType = [System.Windows.MessageBoxButton]::OK
+  $MessageIcon = [System.Windows.MessageBoxImage]::Error
+  $MessageBody = "Please run this script as administrator"
+  $MessageTitle = "Non Administrator"
+  $Result = [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
+}
+Else {
 #Requires -RunAsAdministrator
 
 #Add KIOSK user inside Administrators group and change password
@@ -57,3 +69,4 @@ $MessageBody = "Please restart your computer"
 $MessageTitle = "You are now part of BASTION Community"
 $Result = [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
 ################################################################################################################################################
+}
