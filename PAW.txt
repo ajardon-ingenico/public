@@ -2,9 +2,9 @@
 
 #Create a local administrator account and remove kiosk account
 #Prompt for a password
-$LocalAccountCredentials=Get-Credential -Username "local_username" -Message "Please enter a new secure password for the local admin Account into password field box"
-$LocalAccountUsername=$KioskCredentials.Username
-$LocalAccountPassword=$KioskCredentials.Password
+$LocalAccountCredentials=Get-Credential -Username "local_username" -Message "Please enter your username and a secure password for the local admin Account"
+$LocalAccountUsername=$LocalAccountCredentials.Username
+$LocalAccountPassword=$LocalAccountCredentials.Password
 #Change kiosk password and grant administrator rights
 Get-LocalUser -Name "kiosk" | Remove-LocalUser
 New-LocalUser $LocalAccountUsername -password $LocalAccountPassword -FullName $LocalAccountUsername -description "Local Personnal Administrator Account"
@@ -52,7 +52,9 @@ $MessageIcon = [System.Windows.MessageBoxImage]::Exclamation
 $MessageBody = "Please start your Fortinet VPN Client connection                       Next step will start when you are successfully connected to the VPN and have network connectivity to BASTION"
 $MessageTitle = "Manual operation required"
 $Result = [System.Windows.MessageBox]::Show($MessageBody,$MessageTitle,$ButtonType,$MessageIcon)
-
+    if ($Result -eq "OK") {
+        & "C:\Program Files\Fortinet\Forticlient\ForticlientConsole.exe"
+    }
 While(!(Test-Connection bastion.infra.eu.ginfra.net -Quiet -Count 1)){
     Write-Progress -Activity "VPN Connectivity" -Status "Waiting for network connectivity before joining BASTION domain"
     Start-Sleep -sec 1
