@@ -1,8 +1,6 @@
-#Requires -RunAsAdministrator
-
 #Create a local administrator account and remove kiosk account
 #Prompt for a password
-$LocalAccountCredentials=Get-Credential -Username "local_username" -Message "Please enter your username and a secure password for the local admin Account"
+$LocalAccountCredentials=Get-Credential -Username "local_username" -Message "Please enter your username (Ex: local_ajardon) and a secure password for your personnal local admin Account"
 $LocalAccountUsername=$LocalAccountCredentials.Username
 $LocalAccountPassword=$LocalAccountCredentials.Password
 #Change kiosk password and grant administrator rights
@@ -63,7 +61,7 @@ While(!(Test-Connection bastion.infra.eu.ginfra.net -Quiet -Count 1)){
 
 #Join to BASTION domain
 $DomainJoinCredentials=Get-Credential -Username "bastion.infra.eu.ginfra.net\domainjoin" -Message "Please enter the password provided for the domain join into password field box"
-if(Add-Computer -DomainName "bastion.infra.eu.ginfra.net" -OUPath "OU=Computers,OU=BASTION,OU=TIER1,DC=bastion,DC=infra,DC=eu,DC=ginfra,DC=net" -Credential $DomainJoinCredentials) {
+if(Add-Computer -DomainName "bastion.infra.eu.ginfra.net" -OUPath "OU=Computers,OU=BASTION,OU=TIER1,DC=bastion,DC=infra,DC=eu,DC=ginfra,DC=net" -Credential $DomainJoinCredentials -WarningAction SilentlyContinue) {
     Add-Type -AssemblyName PresentationCore,PresentationFramework
     $ButtonType = [System.Windows.MessageBoxButton]::YesNoCancel
     $MessageIcon = [System.Windows.MessageBoxImage]::Exclamation
