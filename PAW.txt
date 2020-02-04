@@ -16,11 +16,11 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Setti
 
 #Slack Installation
 #Create Folder
-#$Path="C:\TEMP"
-#if(!(Test-path $Path)) {New-Item -ItemType Directory -Force -Path $Path}
+$Path="C:\TEMP"
+if(!(Test-path $Path)) {New-Item -ItemType Directory -Force -Path $Path}
 #Download required files
-#$ProgressPreference = 'SilentlyContinue'
-#Invoke-WebRequest -Uri "https://downloads.slack-edge.com/releases_x64/slack-standalone-4.3.2.0.msi" -OutFile "C:\TEMP\slack-standalone-4.3.2.0.msi"
+$ProgressPreference = 'SilentlyContinue'
+Invoke-WebRequest -Uri "https://downloads.slack-edge.com/releases_x64/slack-standalone-4.3.2.0.msi" -OutFile "C:\TEMP\slack-standalone-4.3.2.0.msi"
 
 #Install Slack Client
 Start-Process msiexec.exe -Wait -ArgumentList '/i C:\TEMP\slack-standalone-4.3.2.0.msi /qn /norestart'
